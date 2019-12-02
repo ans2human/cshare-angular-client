@@ -18,16 +18,27 @@ export class DemoComponent implements OnInit {
     user: localStorage.getItem('id')
   };
   hide = true;
+  selectedContact : any;
+  userList:any = [];
+  selectedUserId: number;
 
   constructor(
     private contactService: ContactService,
     private router: Router
-  ) { 
+  )
+  {
     this.contactService.getData().toPromise().then(data => {
       this.data = data;
       console.log(data);
     });
+
+    this.contactService.userList().toPromise().then(data => {
+      this.userList = data;
+      console.log(data);
+    });
   }
+
+
 
   ngOnInit() {
   }
@@ -51,4 +62,22 @@ export class DemoComponent implements OnInit {
       });
     })
   }
+
+  contactToShare(contact) {
+    this.selectedContact = contact;
+  }
+
+  sendContact() {
+    if(this.selectedUserId !== undefined) {
+      this.selectedContact.user = this.selectedUserId;
+      this.contactService.newData(this.selectedContact).toPromise().then(()=> {
+          console.log("contact created successfully");
+      });
+    }
+  }
+
+// share_contact(contact){
+//   this.selectedContact=contact
+// }
+
 }

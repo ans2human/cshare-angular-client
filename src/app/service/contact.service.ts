@@ -33,4 +33,13 @@ export class ContactService {
     'Authorization': 'Token ' + token});
     return this.http.delete('https://ans2human.pythonanywhere.com/api/v1/contacts/'+ id, {headers: httpHeaders});
   }
+
+  userList(){
+    const token = localStorage.getItem('token');
+    const httpHeaders = new HttpHeaders(
+      {'Content-Type':'application/json; charset=utf-8',
+    'Authorization': 'Token ' + token});
+    return this.http.get('https://ans2human.pythonanywhere.com/api/v1/users/', {headers: httpHeaders});
+  }
+
 }
