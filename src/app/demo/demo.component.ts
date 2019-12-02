@@ -19,6 +19,13 @@ export class DemoComponent implements OnInit {
   };
   hide = true;
   selectedContact : any;
+  seletedContactForUpdate : any = {
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: "",
+    user: localStorage.getItem('id')
+  };
   userList:any = [];
   selectedUserId: number;
 
@@ -27,13 +34,17 @@ export class DemoComponent implements OnInit {
     private router: Router
   )
   {
-    this.contactService.getData().toPromise().then(data => {
-      this.data = data;
-      console.log(data);
-    });
+    this.getContactData();
 
     this.contactService.userList().toPromise().then(data => {
       this.userList = data;
+      console.log(data);
+    });
+  }
+
+  getContactData() {
+    this.contactService.getData().toPromise().then(data => {
+      this.data = data;
       console.log(data);
     });
   }
@@ -55,11 +66,7 @@ export class DemoComponent implements OnInit {
 
   deleteData(id){
     this.contactService.deleteData(id).toPromise().then(data => {
-      this.data.forEach(element => {
-        if(element.id == id){
-          // element.pop();
-        }
-      });
+      this.getContactData();
     })
   }
 
@@ -76,8 +83,15 @@ export class DemoComponent implements OnInit {
     }
   }
 
-// share_contact(contact){
-//   this.selectedContact=contact
-// }
+  update(){
+    console.log("Update data", this.seletedContactForUpdate);
+    this.contactService.updateData(this.seletedContactForUpdate).toPromise().then(data => {
+      this.getContactData();
+    });
+  }
+
+  // contactToUpdate(contact) {
+  //   this.seletedContactForUpdate = contact;
+  // }
 
 }

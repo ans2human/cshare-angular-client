@@ -29,9 +29,17 @@ export class ContactService {
   deleteData(id){
     const token = localStorage.getItem('token');
     const httpHeaders = new HttpHeaders(
-      {'Content-Type':'application/json; charset=utf-8',
+    {'Content-Type':'application/json; charset=utf-8',
     'Authorization': 'Token ' + token});
     return this.http.delete('https://ans2human.pythonanywhere.com/api/v1/contacts/'+ id, {headers: httpHeaders});
+  }
+
+  updateData(data){
+    const token = localStorage.getItem('token');
+    const httpHeaders = new HttpHeaders(
+    {'Content-Type':'application/json; charset=utf-8',
+    'Authorization': 'Token ' + token});
+    return this.http.put('https://ans2human.pythonanywhere.com/api/v1/contacts/'+ data.id + "/", {headers: httpHeaders});
   }
 
   userList(){
