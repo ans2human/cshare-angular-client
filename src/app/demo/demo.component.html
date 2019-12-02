@@ -1,0 +1,101 @@
+<div class="container-fluid"> 
+    <div class="row">
+      <div class="col-lg-3" style="margin-top: 10px;">
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+              New Contact
+            </button>
+      </div>  
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true" *ngIf = "hide">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Contact Form</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">First Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="first name" [(ngModel)]="data1.first_name" name="first_name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Last Name</label>
+                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="last name" [(ngModel)]="data1.last_name" name="last_name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email" [(ngModel)]="data1.email" name="email">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Phone</label>
+                    <input type="number" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="phone"[(ngModel)]="data1.phone" name="phone">
+                  </div>
+              </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="submit()">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <table class="table" id="book-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Association</th>
+                <th>Actions</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of data; let i = index">
+                <td>{{i}}</td>
+                <td>{{d.first_name}}</td>
+                <td>{{d.last_name}}</td>
+                <td>{{d.email}}</td>
+                <td>{{d.phone}}</td>
+                <td>{{d.user}}</td>
+                <td>
+                <button type="button" class="btn btn-primary" style="margin-right: 10px;" data-toggle="modal" data-target="#exampleModalLong1">
+                    Share
+                  </button> 
+                  <div class="modal fade" id="exampleModalLong{{i}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Share</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                              <select name="" id="">
+                                <option value="">name</option>
+                              </select>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary">Submit</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-primary" style="margin-right: 10px;">Update</button>
+                  <button class="btn btn-danger" (click)="deleteData(d.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+  </div>
